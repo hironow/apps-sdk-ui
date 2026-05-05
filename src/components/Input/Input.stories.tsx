@@ -174,11 +174,12 @@ export const AutofillExtensions = (args: InputProps) => (
 )
 AutofillExtensions.args = {
   allowAutofillExtensions: true,
+  autoComplete: "email",
   name: "email",
 }
 
 AutofillExtensions.parameters = {
-  controls: { include: ["allowAutofillExtensions"] },
+  controls: { include: ["allowAutofillExtensions", "autoComplete"] },
 }
 
 export const WithButton = (args: InputProps) => (

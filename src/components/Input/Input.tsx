@@ -42,7 +42,7 @@ export type InputProps = {
   invalid?: boolean
   /**
    * Allow autofill extensions to appear in the input
-   * @default false
+   * @default true when type="password", name is present, or autoComplete is provided
    */
   allowAutofillExtensions?: boolean
   /**
@@ -88,8 +88,10 @@ export const Input = (props: InputProps) => {
     disabled = false,
     readOnly = false,
     invalid = false,
-    // Default to `true` when type="password" or presence of `name`
-    allowAutofillExtensions = type === "password" || !!name,
+    // Default to `true` when the field declares autofill semantics.
+    allowAutofillExtensions = type === "password" ||
+      !!name ||
+      (!!autoComplete && autoComplete !== "off"),
     onFocus,
     onBlur,
     onAnimationStart,
@@ -195,6 +197,7 @@ export const Input = (props: InputProps) => {
         className={s.Input}
         type={type}
         name={name}
+        autoComplete={autoComplete}
         readOnly={readOnly}
         disabled={disabled}
         onFocus={(evt) => {
